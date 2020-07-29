@@ -10,7 +10,7 @@ class App {
 
         canvas.width = this.#size
         canvas.height = this.#size
-        canvas.style.border="5px solid gray"
+        canvas.style.border="1px solid gray"
         canvas.style.backgroundColor="black"
         container.appendChild(canvas)
         this.#context= canvas.getContext('2d');
@@ -29,13 +29,17 @@ class App {
         ctx.save();
 
         ctx.fillStyle = 'rgba(0, 255, 0, 1)';
-        ctx.strokeStyle = 'rgba(0, 153, 255, 0.4)';
+        ctx.strokeStyle = 'rgba(0, 255, 0, 1)';
+
+        ctx.moveTo(0, 0);
+        ctx.setLineDash([2, 6]);
+        ctx.lineTo(time.getSeconds() *4, time.getSeconds()*4);
+        ctx.stroke();
         
-        //clocl
+        //clock
         let timeFormated = `${("0" + time.getHours()).slice(-2)}:${("0" + time.getMinutes()).slice(-2)}:${("0" + time.getSeconds()).slice(-2)}` 
         ctx.fillText( timeFormated, 10, this.#size-10);
 
-        ctx.fillRect(10,10,2,2);
         
         ctx.restore();
         window.requestAnimationFrame(()=>{this.draw()});
